@@ -1,26 +1,30 @@
-const express = require('express')
-const router = express.Router()
 const validate = require('../utils/validate')
-
 const { Aluno } = require('../models')
 
-router.get('/', async(req, res) => {
-    const alunos = await Aluno.findAll()
+async function index(req, res){
+    const _id = req.params.id
 
-    res.json(alunos)
-})
+    let found = []
 
-router.get('/:id', async(req, res) => {
-    const aluno = await Aluno.findOne({
-        where: {
-            id: req.params.id
-        }
+    if(_id){
+        found = [
+            await Aluno.findOnde({
+                where: {
+                    id: _id
+                }
+            })
+        ]
+    }else{
+        found = await Aluno.findAll()
+    }
+
+    res.json({
+        count: found.length,
+        data: found
     })
+}
 
-    res.json(aluno)
-})
-
-router.post('/', async(req, res) => {
+async function create(req, res){
     try{
         const data = req.body
 
@@ -39,9 +43,9 @@ router.post('/', async(req, res) => {
     }catch(err){
         res.status(400).json(err.message)
     }
-})
+}
 
-router.put('/', async(req, res) => {
+async function update(req, res){
     const data = req.body
 
     validate(data, {
@@ -65,9 +69,9 @@ router.put('/', async(req, res) => {
     aluno.save()
 
     res.json(aluno)
-})
+}
 
-router.delete('/:id', async(req, res) => {
+async function destroy(req, res){
     const aluno = await Aluno.findOne({
         where: {
             id: req.params.id
@@ -77,6 +81,6 @@ router.delete('/:id', async(req, res) => {
     aluno.destroy()
 
     res.status(203).send()
-})
+}
 
-module.exports = router
+module.exports = {index, create, update, destroy}

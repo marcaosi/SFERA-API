@@ -1,26 +1,30 @@
-const express = require('express')
-const router = express.Router()
 const validate = require('../utils/validate')
-
 const { Setor } = require('../models')
 
-router.get('/', async(req, res) => {
-    const setores = await Setor.findAll()
+async function index(req, res){
+    const _id = req.params.id
 
-    res.json(setores)
-})
+    let found = []
 
-router.get('/:id', async(req, res) => {
-    const setor = await Setor.findOne({
-        where: {
-            id: req.params.id
-        }
+    if(_id){
+        found = [
+            await Setor.findOne({
+                where: {
+                    id: req.params.id
+                }
+            })
+        ]
+    }else{
+        found = await Setor.findAll()
+    }
+
+    res.json({
+        count: found.length,
+        data: found
     })
+}
 
-    res.json(setor)
-})
-
-router.post('/', async(req, res) => {
+async function create(req, res){
     try{
         const data = req.body
 
@@ -34,9 +38,9 @@ router.post('/', async(req, res) => {
     }catch(err){
         res.status(400).json(err.message)
     }
-})
+}
 
-router.put('/', async(req, res) => {
+async function update(req, res){
     const data = req.body
 
     validate(data, {
@@ -55,9 +59,9 @@ router.put('/', async(req, res) => {
     setor.save()
 
     res.json(setor)
-})
+}
 
-router.delete('/:id', async(req, res) => {
+async function destroy(req, res){
     const setor = await Setor.findOne({
         where: {
             id: req.params.id
@@ -67,6 +71,6 @@ router.delete('/:id', async(req, res) => {
     setor.destroy()
 
     res.status(203).send()
-})
+}
 
-module.exports = router
+module.exports = {index, create, update, destroy}
