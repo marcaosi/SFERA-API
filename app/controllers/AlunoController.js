@@ -7,12 +7,18 @@ async function index(req, res){
     let found = []
 
     if(_id){
+        const aluno = await Aluno.findOnde({
+            where: {
+                id: _id
+            }
+        })
+
+        if(!aluno){
+            return res.status(203).json(null)
+        }
+
         found = [
-            await Aluno.findOnde({
-                where: {
-                    id: _id
-                }
-            })
+            aluno    
         ]
     }else{
         found = await Aluno.findAll()
@@ -64,6 +70,10 @@ async function update(req, res){
         }
     })
 
+    if(!aluno){
+        return res.status(404).json()
+    }
+
     aluno.nome = data.nome
 
     aluno.save()
@@ -77,6 +87,10 @@ async function destroy(req, res){
             id: req.params.id
         }
     })
+
+    if(!aluno){
+        return res.status(404).json()
+    }
 
     aluno.destroy()
 

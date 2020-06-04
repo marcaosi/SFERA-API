@@ -7,12 +7,18 @@ async function index(req, res){
     let found = []
 
     if(_id){
+        const funcao = await Funcao.findOne({
+            where: {
+                id: req.params.id
+            }
+        })
+
+        if(!funcao){
+            return res.status(203).json(null)
+        }
+
         found = [
-            await Funcao.findOne({
-                where: {
-                    id: req.params.id
-                }
-            })
+            funcao
         ]
     }else{
         found = await Funcao.findAll()
@@ -58,6 +64,10 @@ async function update(req, res){
         }
     })
 
+    if(!funcao){
+        return res.status(404).json(null)
+    }
+
     funcao.nome = req.body.nome
     funcao.descricao = req.body.descricao
     funcao.status = req.body.status
@@ -74,6 +84,10 @@ async function destroy(req, res){
             id: req.params.id
         }
     })
+
+    if(!funcao){
+        return res.status(404).json(null)
+    }
 
     funcao.destroy()
 

@@ -7,12 +7,18 @@ async function index(req, res){
     let found = []
 
     if(_id){
+        const sala = await Sala.findOne({
+            where: {
+                id: req.params.id
+            }
+        })
+
+        if(!sala){
+            return res.status(203).json(null)
+        }
+
         found = [
-            await Sala.findOne({
-                where: {
-                    id: req.params.id
-                }
-            })
+            sala
         ]
     }else{
         found = await Sala.findAll()
@@ -54,6 +60,10 @@ async function update(req, res){
                 id: req.body.id
             }
         })
+
+        if(!sala){
+            return res.status(404).json(null)
+        }
     
         sala.descricao = req.body.descricao
         sala.ano = req.body.ano
@@ -71,6 +81,10 @@ async function destroy(req, res){
             id: req.params.id
         }
     })
+
+    if(!sala){
+        return res.status(404).json(null)
+    }
 
     sala.destroy()
 

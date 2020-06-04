@@ -7,12 +7,18 @@ async function index(req, res){
     let found = []
 
     if(_id){
+        const colaborador = await Colaborador.findOne({
+            where: {
+                id: _id
+            }
+        })
+
+        if(!colaborador){
+            return res.status(203).json(null)
+        }
+
         found = [
-            await Colaborador.findOne({
-                where: {
-                    id: _id
-                }
-            })
+            colaborador
         ]
     }else{
         found = await Colaborador.findAll()
@@ -60,10 +66,12 @@ async function update(req, res){
         }
     })
 
+    if(!colaborador){
+        return res.status(404).json(null)
+    }
+
     colaborador.nome = data.nome
-
     colaborador.save()
-
     res.json(colaborador)
 }
 
@@ -73,6 +81,10 @@ async function destroy(req, res){
             id: req.params.id
         }
     })
+
+    if(!colaborador){
+        return res.status(404).json(null)
+    }
 
     colaborador.destroy()
 

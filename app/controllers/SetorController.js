@@ -7,12 +7,18 @@ async function index(req, res){
     let found = []
 
     if(_id){
+        const setor = await Setor.findOne({
+            where: {
+                id: req.params.id
+            }
+        })
+
+        if(!setor){
+            return res.status(203).json(null)
+        }
+
         found = [
-            await Setor.findOne({
-                where: {
-                    id: req.params.id
-                }
-            })
+            setor
         ]
     }else{
         found = await Setor.findAll()
@@ -54,6 +60,10 @@ async function update(req, res){
         }
     })
 
+    if(!setor){
+        return res.status(404).json(null)
+    }
+
     setor.nome = data.nome
 
     setor.save()
@@ -67,6 +77,10 @@ async function destroy(req, res){
             id: req.params.id
         }
     })
+
+    if(!setor){
+        return res.status(404).json(null)
+    }
 
     setor.destroy()
 
