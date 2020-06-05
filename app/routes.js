@@ -6,6 +6,7 @@ const ColaboradorController = require("./controllers/ColaboradorController")
 const FuncaoController = require("./controllers/FuncaoController")
 const SetorController = require("./controllers/SetorController")
 const SalaController = require("./controllers/SalaController")
+const AgendaController = require("./controllers/AgendaController")
 
 /**
  * Routes for Aluno
@@ -56,5 +57,15 @@ router.get('/sala/:id', SalaController.index)
 router.post('/sala', SalaController.create)
 router.put('/sala', SalaController.update)
 router.delete('/sala/:id', SalaController.destroy)
+
+/**
+ * Routes for Agenda
+ */
+
+router.get('/agenda', AgendaController.index)
+router.get('/agenda/:id', AgendaController.index)
+router.post('/agenda', AgendaController.create)
+router.put('/agenda', AgendaController.update)
+router.delete('/agenda/:id', AgendaController.destroy)
 
 module.exports = router
