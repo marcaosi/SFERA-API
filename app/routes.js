@@ -7,6 +7,9 @@ const FuncaoController = require("./controllers/FuncaoController")
 const SetorController = require("./controllers/SetorController")
 const SalaController = require("./controllers/SalaController")
 const AgendaController = require("./controllers/AgendaController")
+const LoginController = require("./controllers/LoginController")
+
+router.post('/login', LoginController.create)
 
 /**
  * Routes for Aluno

@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
         status: DataTypes.BOOLEAN,
         documento: DataTypes.STRING,
         nascimento: DataTypes.DATE,
-        matricula: DataTypes.BIGINT
+        matricula: DataTypes.BIGINT,
+        senha: DataTypes.STRING
     }, {
         freezeTableName: true
     })
