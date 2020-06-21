@@ -1,5 +1,6 @@
 const validate = require('../utils/validate')
 const { Colaborador } = require('../models')
+const {criptografar} = require("../utils/criptografia")
 
 async function index(req, res){
     const _id = req.params.id
@@ -38,8 +39,11 @@ async function create(req, res){
             nome: "string|required",
             matricula: "number|required",
             documento: "string|required",
-            nascimento: "date|required"
+            nascimento: "date|required",
+            senha: "string|required"
         })
+
+        data.senha = criptografar(data.senha)
 
         const colaborador = await Colaborador.create(data)
 
@@ -59,6 +63,8 @@ async function update(req, res){
         nascimento: "date|required",
         id: "number|required"
     })
+
+    data.senha = criptografar(data.senha)
 
     const colaborador = await Colaborador.findOne({
         where: {
