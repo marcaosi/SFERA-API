@@ -6,28 +6,34 @@ async function index(req, res){
 
     let found = []
 
-    if(_id){
-        const aluno = await Aluno.findOnde({
-            where: {
-                id: _id
+    try{
+        if(_id){
+            console.log(Aluno)
+            const aluno = await Aluno.findOne({
+                where: {
+                    id: _id
+                }
+            })
+            
+            if(!aluno){
+                return res.status(203).json(null)
             }
-        })
-
-        if(!aluno){
-            return res.status(203).json(null)
+            
+            found = [
+                aluno    
+            ]
+        }else{
+            found = await Aluno.findAll()
         }
-
-        found = [
-            aluno    
-        ]
-    }else{
-        found = await Aluno.findAll()
+    
+        res.json({
+            count: found.length,
+            data: found
+        })
+    }catch(err){
+        console.log(err.message)
+        res.status(500).send(err)
     }
-
-    res.json({
-        count: found.length,
-        data: found
-    })
 }
 
 async function create(req, res){
