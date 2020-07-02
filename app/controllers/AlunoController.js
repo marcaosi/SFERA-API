@@ -1,5 +1,5 @@
 const validate = require('../utils/validate')
-const { Aluno } = require('../models')
+const { Aluno, sequelize } = require('../models')
 
 async function index(req, res){
     const _id = req.params.id
