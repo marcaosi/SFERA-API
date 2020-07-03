@@ -81,6 +81,11 @@ async function update(req, res){
     }
 
     aluno.nome = data.nome
+    aluno.contato = data.contato
+    aluno.documento = data.documento
+    aluno.mae = data.mae
+    aluno.pai = data.pai
+    aluno.nascimento = data.nascimento
 
     aluno.save()
 
