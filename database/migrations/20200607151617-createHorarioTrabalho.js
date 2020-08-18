@@ -11,19 +11,19 @@ module.exports = {
       },
       entrada1: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.STRING
       },
       entrada2: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.STRING
       },
       saida1: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.STRING
       },
       saida2: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

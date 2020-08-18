@@ -1,9 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
     const HorarioTrabalho = sequelize.define('HorarioTrabalho', {
-        entrada1: DataTypes.DATE,
-        entrada2: DataTypes.DATE,
-        saida1: DataTypes.DATE,
-        saida2: DataTypes.DATE
+        entrada1: DataTypes.STRING,
+        entrada2: DataTypes.STRING,
+        saida1: DataTypes.STRING,
+        saida2: DataTypes.STRING
     }, {
         freezeTableName: true
     })

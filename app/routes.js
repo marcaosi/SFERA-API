@@ -8,6 +8,7 @@ const SetorController = require("./controllers/SetorController")
 const SalaController = require("./controllers/SalaController")
 const AgendaController = require("./controllers/AgendaController")
 const LoginController = require("./controllers/LoginController")
+const HorarioTrabalhoController = require('./controllers/HorarioTrabalhoController')
 
 router.post('/login', LoginController.create)
 
@@ -70,5 +71,15 @@ router.get('/agenda/:id', AgendaController.index)
 router.post('/agenda', AgendaController.create)
 router.put('/agenda', AgendaController.update)
 router.delete('/agenda/:id', AgendaController.destroy)
+
+/**
+ * Routes for Horário de Trabalho
+ */
+
+router.get('/horarioTrabalho', HorarioTrabalhoController.index)
+router.get('/horarioTrabalho/:id', HorarioTrabalhoController.index)
+router.post('/horarioTrabalho', HorarioTrabalhoController.create)
+router.put('/horarioTrabalho', HorarioTrabalhoController.update)
+router.delete('/horarioTrabalho/:id', HorarioTrabalhoController.destroy)
 
 module.exports = router

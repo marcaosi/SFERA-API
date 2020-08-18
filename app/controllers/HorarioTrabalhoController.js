@@ -21,7 +21,7 @@ async function index(req, res){
             horarioTrabalho    
         ]
     }else{
-        found = await horarioTrabalho.findAll()
+        found = await HorarioTrabalho.findAll()
     }
 
     res.json({
@@ -45,6 +45,7 @@ async function create(req, res){
 
         res.json(horarioTrabalho)
     }catch(err){
+        console.log(err)
         res.status(400).json(err.message)
     }
 }
