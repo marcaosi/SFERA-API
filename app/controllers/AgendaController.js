@@ -10,7 +10,8 @@ async function index(req, res){
         const agenda = await Agenda.findOne({
             where: {
                 id: req.params.id
-            }
+            },
+            include: ['aluno', 'sala']
         })
 
         if(!agenda){
@@ -21,7 +22,9 @@ async function index(req, res){
             agenda
         ]
     }else{
-        found = await Agenda.findAll()
+        found = await Agenda.findAll({
+            include: ['aluno', 'sala']
+        })
     }
 
     res.json({
