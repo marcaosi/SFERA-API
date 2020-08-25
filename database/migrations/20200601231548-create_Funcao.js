@@ -29,6 +29,14 @@ module.exports = {
           key: 'id'
         }
       },
+      horarioTrabalho_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'HorarioTrabalho',
+          key: 'id'
+        }
+      },
       createdAt: {
         type: Sequelize.DATE
       },

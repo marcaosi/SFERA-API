@@ -38,13 +38,15 @@ async function create(req, res){
             nome: "string|required",
             descricao: "string",
             status: "boolean",
-            setor_id: "number|required"
+            setor_id: "number|required",
+            horarioTrabalho_id: "number|required"
         })
 
         const funcao = await Funcao.create(data)
 
         res.json(funcao)
     }catch(err){
+        console.log(err)
         res.status(400).json(err.message)
     }
 }
@@ -56,6 +58,7 @@ async function update(req, res){
         descricao: "string",
         status: "boolean",
         setor_id: "number|required",
+        horarioTrabalho_id: "number|required",
         id: "number|required"
     })
     const funcao = await Funcao.findOne({
