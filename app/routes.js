@@ -9,6 +9,9 @@ const SalaController = require("./controllers/SalaController")
 const AgendaController = require("./controllers/AgendaController")
 const LoginController = require("./controllers/LoginController")
 const HorarioTrabalhoController = require('./controllers/HorarioTrabalhoController')
+const ItemAgendaController = require('./controllers/ItemAgendaController')
+const FrequenciaController = require('./controllers/FrequenciaController')
+const OcorrenciaController = require('./controllers/OcorrenciaController')
 
 router.post('/login', LoginController.create)
 
@@ -81,5 +84,35 @@ router.get('/horarioTrabalho/:id', HorarioTrabalhoController.index)
 router.post('/horarioTrabalho', HorarioTrabalhoController.create)
 router.put('/horarioTrabalho', HorarioTrabalhoController.update)
 router.delete('/horarioTrabalho/:id', HorarioTrabalhoController.destroy)
+
+/**
+ * Routes for Item da Agenda
+ */
+
+router.get('/itemAgenda', ItemAgendaController.index)
+router.get('/itemAgenda/:id', ItemAgendaController.index)
+router.post('/itemAgenda', ItemAgendaController.create)
+router.put('/itemAgenda', ItemAgendaController.update)
+router.delete('/itemAgenda/:id', ItemAgendaController.destroy)
+
+/**
+ * Routes for Frequencia
+ */
+
+router.get('/frequencia', FrequenciaController.index)
+router.get('/frequencia/:id', FrequenciaController.index)
+router.post('/frequencia', FrequenciaController.create)
+router.put('/frequencia', FrequenciaController.update)
+router.delete('/frequencia/:id', FrequenciaController.destroy)
+
+/**
+ * Routes for Ocorrencia
+ */
+
+router.get('/ocorrencia', OcorrenciaController.index)
+router.get('/ocorrencia/:id', OcorrenciaController.index)
+router.post('/ocorrencia', OcorrenciaController.create)
+router.put('/ocorrencia', OcorrenciaController.update)
+router.delete('/ocorrencia/:id', OcorrenciaController.destroy)
 
 module.exports = router
